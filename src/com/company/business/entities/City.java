@@ -11,14 +11,14 @@ import java.io.Serializable;
 @XmlAccessorType(XmlAccessType.NONE)
 public class City implements Serializable {
     @XmlElement
-    private int codeOfCity = 0;
+    private int codeOfCity;
     @XmlElement
     private String nameOfCity;
     @XmlElement
     private int population;
     @XmlElement
     private boolean isCapital;
-
+    @XmlElement
     private String countryOfCity;
 
     public City() {

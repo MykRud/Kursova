@@ -23,12 +23,11 @@ import java.util.List;
 
 public class DataBase {
 
-    //public String PACKAGE = CountryService.class.getPackage().getName();
+    public static final String PACKAGE = CountryService.class.getPackage().getName();
     private JAXBContext jc;
 
     public DataBase() throws JAXBException {
-        //JAXBContext context = JAXBContext.newInstance(Cat.class);
-        //jc = JAXBContext.newInstance(CountryService.class);
+        jc = JAXBContext.newInstance(PACKAGE);
     }
 
     public void save(CountryService countryService) {
@@ -54,8 +53,8 @@ public class DataBase {
 
     public List<Country> readCountries() throws SAXException {
 
-        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-                Schema schema = sf.newSchema(new File("countries.xsd"));
+        //SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+          //      Schema schema = sf.newSchema(new File("countries.xsd"));
 
         CountryService cs = null;
         File xmlFile = new File("countries.xml");
@@ -64,7 +63,7 @@ public class DataBase {
 
             jc = JAXBContext.newInstance(CountryService.class);
             Unmarshaller jaxbUnmarshaller = jc.createUnmarshaller();
-            jaxbUnmarshaller.setSchema(schema);
+            //jaxbUnmarshaller.setSchema(schema);
             if (in.read() == -1)
                 return new ArrayList<>();
             cs = (CountryService) jaxbUnmarshaller.unmarshal(xmlFile);
@@ -75,12 +74,17 @@ public class DataBase {
         return cs != null ? cs.getListOfCountries() : new ArrayList<>();
     }
 
-    public List<City> readCities() {
+    public List<City> readCities() throws SAXException {
+
+        //SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        //Schema schema = sf.newSchema(new File("cities.xsd"));
+
         CityService cs = null;
         File xmlFile = new File("cities.xml");
         try (InputStream in = new FileInputStream(xmlFile)) {
             jc = JAXBContext.newInstance(CityService.class);
             Unmarshaller jaxbUnmarshaller = jc.createUnmarshaller();
+            //jaxbUnmarshaller.setSchema(schema);
             if (in.read() == -1)
                 return new ArrayList<>();
             cs = (CityService) jaxbUnmarshaller.unmarshal(xmlFile);
