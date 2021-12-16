@@ -53,8 +53,8 @@ public class DataBase {
 
     public List<Country> readCountries() throws SAXException {
 
-        //SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-          //      Schema schema = sf.newSchema(new File("countries.xsd"));
+        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        Schema schema = sf.newSchema(new File("countries.xsd"));
 
         CountryService cs = null;
         File xmlFile = new File("countries.xml");
@@ -63,7 +63,7 @@ public class DataBase {
 
             jc = JAXBContext.newInstance(CountryService.class);
             Unmarshaller jaxbUnmarshaller = jc.createUnmarshaller();
-            //jaxbUnmarshaller.setSchema(schema);
+            jaxbUnmarshaller.setSchema(schema);
             if (in.read() == -1)
                 return new ArrayList<>();
             cs = (CountryService) jaxbUnmarshaller.unmarshal(xmlFile);
@@ -76,15 +76,15 @@ public class DataBase {
 
     public List<City> readCities() throws SAXException {
 
-        //SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        //Schema schema = sf.newSchema(new File("cities.xsd"));
+        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        Schema schema = sf.newSchema(new File("cities.xsd"));
 
         CityService cs = null;
         File xmlFile = new File("cities.xml");
         try (InputStream in = new FileInputStream(xmlFile)) {
             jc = JAXBContext.newInstance(CityService.class);
             Unmarshaller jaxbUnmarshaller = jc.createUnmarshaller();
-            //jaxbUnmarshaller.setSchema(schema);
+            jaxbUnmarshaller.setSchema(schema);
             if (in.read() == -1)
                 return new ArrayList<>();
             cs = (CityService) jaxbUnmarshaller.unmarshal(xmlFile);

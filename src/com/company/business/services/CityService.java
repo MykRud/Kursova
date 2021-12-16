@@ -36,7 +36,8 @@ public class CityService extends Service {
         listOfCities = getDataBase().readCities();
     }
 
-    public CityService() throws JAXBException, SAXException{}
+    public CityService() throws JAXBException, SAXException{
+    } // Потребується для XML серіалізації
 
     public CityService(boolean b) throws JAXBException, SAXException {
         listOfCities = getDataBase().readCities();
